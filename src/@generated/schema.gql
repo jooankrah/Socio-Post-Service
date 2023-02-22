@@ -1,0 +1,63 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Comment entity"""
+type Comment {
+  authorId: String!
+  content: String!
+  id: String!
+  postId: String
+  replies: [Comment!]
+}
+
+input CreatePostInput {
+  authorId: String
+  content: String!
+  title: String
+  topicId: String!
+}
+
+input CreatecommentInput {
+  authorId: String!
+  content: String!
+  postId: String
+}
+
+type Mutation {
+  createComment(createcommentInput: CreatecommentInput!): Comment!
+  createCommentReply(commentId: String!, createcommentInput: CreatecommentInput!): Comment!
+  createPost(createPostInput: CreatePostInput!): Post!
+  deletePost(id: String!): Post!
+  likePost(postId: String!, userId: String!): Post!
+  updatePost(updatePostInput: UpdatePostInput!): Post!
+}
+
+"""Post Model"""
+type Post {
+  author: User!
+  authorId: String!
+  comments: [Comment!]
+  content: String!
+  id: String!
+  likes: [User!]
+  title: String
+}
+
+type Query {
+  getPostById(id: String!): Post!
+  post(options: String!): [Post!]!
+}
+
+input UpdatePostInput {
+  authorId: String
+  content: String
+  id: String!
+  title: String
+  topicId: String
+}
+
+type User {
+  id: String!
+  posts: [Post!]
+}
